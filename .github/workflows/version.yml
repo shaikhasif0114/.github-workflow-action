@@ -1,4 +1,4 @@
-name: This is for greeting
+name: Sunday
 on: 
  push: 
 jobs:
@@ -6,4 +6,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: greeting
-        run: echo "Hello From GitHub action"
+        run: echo "Hello From Goregaon"
