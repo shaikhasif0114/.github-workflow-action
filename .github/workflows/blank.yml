@@ -1,6 +1,6 @@
 name: This is for greeting
 on: 
- push: 
+ workflow_call: 
 jobs:
   build:
     runs-on: ubuntu-latest
