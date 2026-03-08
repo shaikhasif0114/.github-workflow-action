@@ -1,0 +1,9 @@
+name: This is for greeting
+on: 
+push: 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: greeting
+        run: echo "Hello From GitHub action"
