@@ -10,7 +10,7 @@ jobs:
       - name: print date and time
         run: date
       - name: print list of repo
-        run: ls
+        run: ls -la
       - name: print ruuner OS name
         run: cat /etc/os-release
       - name: Print Branch Name
