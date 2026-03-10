@@ -1,0 +1,19 @@
+name: OS details
+on:
+  push: 
+jobs:
+  OS:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v4
+      - name: print date and time
+        run: date
+      - name: print list of repo
+        run: ls
+      - name: print ruuner OS name
+        run: cat /etc/os-release
+      - name: Print Branch Name
+        run: echo "Branch is -> ${{ github.ref_name }}"
+      - name: This step will fail
+        run: exit 1
