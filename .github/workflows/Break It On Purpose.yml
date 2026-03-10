@@ -15,5 +15,5 @@ jobs:
         run: cat /etc/os-release
       - name: Print Branch Name
         run: echo "Branch is -> ${{ github.ref_name }}"
-      - name: This step will fail
-        run: exit 1
+      - name: This code is fix now
+        run: echo "All jobs are sucessful"
