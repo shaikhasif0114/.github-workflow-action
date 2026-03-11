@@ -37,7 +37,7 @@ jobs:
         run: |
           echo "Checking portfolio files..."
           ls -la
-          if [ -f "index.html" ]; then
+          if [ -f ".github/workflows/index.html" ]; then
             echo "✅ index.html found!"
             echo "File size: $(du -sh index.html)"
           else
@@ -51,7 +51,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          publish_dir: ./.github/workflows/
           publish_branch: gh-pages
 
       # Step 5 — Print the Live Portfolio URL
