@@ -1,25 +1,24 @@
 name: Deploy Portfolio
 
-# Manual trigger only — click button to deploy
 on:
   workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true    # ← fixes Node.js warning
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    # Required permissions for GitHub Pages deployment
     permissions:
       contents: write
       pages: write
       id-token: write
 
     steps:
-      # Step 1 — Checkout the repo code
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4              # ✅ keep v4
 
-      # Step 2 — Show basic run info
       - name: Show Run Info
         run: |
           echo "================================================"
@@ -32,29 +31,25 @@ jobs:
           echo "Date/Time  : $(date)"
           echo "================================================"
 
-      # Step 3 — Verify portfolio file exists
       - name: Verify Portfolio File
         run: |
           echo "Checking portfolio files..."
-          ls -la
+          ls -la .github/workflows/
           if [ -f ".github/workflows/index.html" ]; then
             echo "✅ index.html found!"
-            echo "File size: $(du -sh index.html)"
+            echo "File size: $(du -sh .github/workflows/index.html)"
           else
             echo "❌ index.html NOT found"
-            echo "Make sure index.html is in the root of your repo"
             exit 1
           fi
 
-      # Step 4 — Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4    # ✅ upgraded v3 → v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./.github/workflows/
           publish_branch: gh-pages
 
-      # Step 5 — Print the Live Portfolio URL
       - name: Print Portfolio URL
         run: |
           echo "================================================"
@@ -62,12 +57,7 @@ jobs:
           echo "================================================"
           echo ""
           echo "  🌐 Your Portfolio is LIVE at:"
-          echo ""
           echo "  https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
           echo ""
-          echo "  Direct URL:"
-          echo "  https://asifshaikh0114.github.io/90Days0fDevOps/"
-          echo ""
-          echo "  NOTE: It may take 2-3 minutes to go live"
-          echo "  after the first deployment."
+          echo "  NOTE: Takes 2-3 minutes to go live"
           echo "================================================"
