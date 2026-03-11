@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asif Shaikh — DevOps Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a08;--surface:#111110;--surface2:#1a1a17;--border:#2a2a25;--accent:#e8ff47;--accent2:#ff6b35;--accent3:#47ffb8;--text:#f0ede6;--muted:#6b6b60;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none;}
+#cur{position:fixed;width:8px;height:8px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;}
+#cur2{position:fixed;width:32px;height:32px;border:1px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.08s linear;opacity:0.4;}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);pointer-events:none;z-index:1;}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(232,255,71,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(232,255,71,0.02) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;z-index:0;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 64px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,8,0.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.1em;color:var(--accent);}
+.nav-links{display:flex;gap:48px;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;transition:color 0.3s;cursor:none;}
+.nav-links a:hover{color:var(--accent);}
+.nav-badge{display:flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid rgba(71,255,184,0.3);font-size:0.65rem;color:var(--accent3);letter-spacing:0.1em;}
+.badge-dot{width:5px;height:5px;background:var(--accent3);border-radius:50%;animation:ping 2s infinite;}
+@keyframes ping{0%,100%{box-shadow:0 0 0 0 rgba(71,255,184,0.4);}50%{box-shadow:0 0 0 6px rgba(71,255,184,0);}}
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;padding:120px 64px 80px;overflow:hidden;}
+.orb1{position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(232,255,71,0.06) 0%,transparent 65%);right:-100px;top:50%;transform:translateY(-50%);animation:flt 6s ease-in-out infinite;pointer-events:none;}
+.orb2{position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(255,107,53,0.05) 0%,transparent 70%);left:200px;bottom:100px;animation:flt 8s ease-in-out infinite reverse;pointer-events:none;}
+@keyframes flt{0%,100%{transform:translateY(-50%) scale(1);}50%{transform:translateY(-53%) scale(1.05);}}
+.hero-left{position:relative;z-index:2;max-width:750px;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:28px;animation:fadeUp 0.8s ease both;}
+.eyebrow::before{content:'';width:32px;height:1px;background:var(--accent);}
+.hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,12vw,10rem);line-height:0.88;letter-spacing:0.02em;margin-bottom:8px;animation:fadeUp 0.8s 0.1s ease both;}
+.hero-name .y{color:var(--accent);}
+.hero-title{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:clamp(1rem,2.5vw,1.6rem);color:var(--muted);margin-bottom:36px;animation:fadeUp 0.8s 0.2s ease both;}
+.hero-desc{font-size:0.78rem;color:var(--muted);line-height:2;max-width:520px;margin-bottom:48px;animation:fadeUp 0.8s 0.3s ease both;border-left:2px solid var(--border);padding-left:20px;}
+.hero-desc em{color:var(--accent3);font-style:normal;}
+.btns{display:flex;gap:16px;flex-wrap:wrap;animation:fadeUp 0.8s 0.4s ease both;}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:all 0.3s;cursor:none;position:relative;overflow:hidden;}
+.btn-y{background:var(--accent);color:#000;font-weight:500;}
+.btn-y:hover{background:#fff;transform:translateY(-2px);box-shadow:0 12px 32px rgba(232,255,71,0.3);}
+.btn-o{background:transparent;color:var(--text);border:1px solid var(--border);}
+.btn-o:hover{border-color:var(--accent2);color:var(--accent2);}
+.strip{position:relative;z-index:1;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0 64px;display:grid;grid-template-columns:repeat(4,1fr);}
+.si{padding:40px 0;border-right:1px solid var(--border);text-align:center;}
+.si:last-child{border-right:none;}
+.sn{font-family:'Bebas Neue',sans-serif;font-size:4.5rem;color:var(--accent);line-height:1;margin-bottom:8px;}
+.sl{font-size:0.62rem;color:var(--muted);letter-spacing:0.18em;text-transform:uppercase;}
+section{position:relative;z-index:1;padding:110px 64px;}
+.sh{display:flex;align-items:baseline;gap:20px;margin-bottom:72px;}
+.sn2{font-size:0.62rem;color:var(--accent2);letter-spacing:0.2em;}
+.st{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);letter-spacing:0.03em;}
+.sl2{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
+.skw{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.skb{background:var(--bg);padding:36px 32px;transition:all 0.4s;cursor:none;position:relative;overflow:hidden;}
+.skb::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transform:scaleX(0);transform-origin:left;transition:transform 0.4s;}
+.skb:hover{background:var(--surface);}
+.skb:hover::after{transform:scaleX(1);}
+.ski{font-size:2rem;margin-bottom:20px;}
+.skn{font-family:'Fraunces',serif;font-weight:600;font-size:1.1rem;margin-bottom:10px;}
+.skd{font-size:0.72rem;color:var(--muted);line-height:1.9;margin-bottom:20px;}
+.skt{display:flex;flex-wrap:wrap;gap:6px;}
+.tag{padding:3px 10px;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;border:1px solid var(--border);color:var(--muted);transition:all 0.3s;}
+.skb:hover .tag{border-color:rgba(232,255,71,0.25);color:var(--accent);}
+.exw{display:grid;grid-template-columns:1fr 2fr;gap:80px;}
+.exl{position:sticky;top:120px;height:fit-content;}
+.exb{font-family:'Bebas Neue',sans-serif;font-size:8rem;color:var(--border);line-height:1;}
+.exi{display:flex;flex-direction:column;}
+.exe{padding:40px 0;border-bottom:1px solid var(--border);position:relative;padding-left:24px;cursor:none;}
+.exe::before{content:'';position:absolute;left:0;top:48px;width:8px;height:8px;background:var(--border);border-radius:50%;transition:background 0.3s;}
+.exe:hover::before{background:var(--accent);}
+.exm{display:flex;align-items:center;gap:16px;margin-bottom:10px;flex-wrap:wrap;}
+.exc{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;}
+.exp{font-size:0.62rem;color:var(--muted);letter-spacing:0.12em;background:var(--surface2);padding:3px 10px;border:1px solid var(--border);}
+.exr{font-size:0.72rem;color:var(--accent);letter-spacing:0.08em;margin-bottom:16px;}
+.exu{list-style:none;}
+.exu li{font-size:0.74rem;color:var(--muted);line-height:1.9;padding-left:14px;position:relative;margin-bottom:4px;}
+.exu li::before{content:'→';position:absolute;left:0;color:var(--accent2);}
+.prg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.prc{background:var(--bg);padding:36px 32px;transition:all 0.4s;cursor:none;display:flex;flex-direction:column;}
+.prc:hover{background:var(--surface2);}
+.prn{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--border);line-height:1;margin-bottom:16px;}
+.prt{font-family:'Fraunces',serif;font-weight:600;font-size:1rem;margin-bottom:12px;}
+.prd{font-size:0.72rem;color:var(--muted);line-height:1.9;margin-bottom:20px;flex:1;}
+.prs{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;}
+.ctw{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.ctb{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,5.5rem);line-height:0.95;letter-spacing:0.02em;margin-bottom:32px;}
+.ctb span{color:var(--accent);}
+.cts{font-size:0.78rem;color:var(--muted);line-height:2;margin-bottom:48px;}
+.ctl{display:flex;flex-direction:column;}
+.cl{display:flex;align-items:center;gap:20px;padding:20px 0;border-bottom:1px solid var(--border);text-decoration:none;color:var(--text);font-size:0.8rem;transition:all 0.3s;cursor:none;}
+.cl:hover{color:var(--accent);padding-left:12px;}
+.ci{font-size:1.1rem;width:24px;}
+.sp{background:var(--surface);border:1px solid var(--border);padding:40px;}
+.sp h4{font-size:0.62rem;color:var(--accent2);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:28px;}
+.sg{margin-bottom:20px;}
+.sgl{font-size:0.62rem;color:var(--muted);letter-spacing:0.15em;margin-bottom:10px;text-transform:uppercase;}
+.stags{display:flex;flex-wrap:wrap;gap:6px;}
+.stag{padding:4px 12px;font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;background:var(--surface2);border:1px solid var(--border);color:var(--muted);}
+.stag.y{border-color:rgba(232,255,71,0.2);color:var(--accent);}
+.stag.o{border-color:rgba(255,107,53,0.2);color:var(--accent2);}
+.stag.g{border-color:rgba(71,255,184,0.2);color:var(--accent3);}
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:28px 64px;display:flex;justify-content:space-between;align-items:center;}
+footer p{font-size:0.65rem;color:var(--muted);}
+footer span{color:var(--accent);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.on{opacity:1;transform:translateY(0);}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border);}
+::-webkit-scrollbar-thumb:hover{background:var(--accent);}
+@media(max-width:900px){
+  nav{padding:16px 24px;}.nav-links{display:none;}
+  .hero{padding:100px 24px 60px;}section{padding:64px 24px;}
+  .strip{padding:0 24px;grid-template-columns:repeat(2,1fr);}
+  .skw,.prg{grid-template-columns:1fr;}
+  .exw{grid-template-columns:1fr;}.exl{display:none;}
+  .ctw{grid-template-columns:1fr;gap:40px;}
+  footer{padding:24px;flex-direction:column;gap:8px;text-align:center;}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div><div id="cur2"></div>
+
+<nav>
+  <div class="logo">A·Shaikh</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#exp">Experience</a></li>
+    <li><a href="#proj">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-badge"><div class="badge-dot"></div>Open to Work</div>
+</nav>
+
+<section class="hero">
+  <div class="orb1"></div><div class="orb2"></div>
+  <div class="hero-left">
+    <div class="eyebrow">DevOps Engineer · Mumbai, India</div>
+    <h1 class="hero-name">ASIF<br><span class="y">SHAIKH</span></h1>
+    <p class="hero-title">Building Infrastructure that Never Sleeps</p>
+    <p class="hero-desc">
+      // 2+ years shipping scalable CI/CD pipelines,<br>
+      cloud-native Kubernetes platforms &amp; IaC automation<br>
+      on <em>AWS</em> &amp; <em>Azure</em>.<br>
+      <em>99%+ uptime</em> · <em>40% cost reduction</em> · <em>Zero-downtime deploys</em>
+    </p>
+    <div class="btns">
+      <a href="https://github.com/asifshaikh0114" target="_blank" class="btn btn-y">⌥ GitHub</a>
+      <a href="mailto:shaikhasif0114@gmail.com" class="btn btn-o">✉ Email Me</a>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="si reveal"><div class="sn" data-t="2">0</div><div class="sl">Years Experience</div></div>
+  <div class="si reveal"><div class="sn" data-t="15">0</div><div class="sl">Technologies</div></div>
+  <div class="si reveal"><div class="sn" data-t="99">0</div><div class="sl">% Uptime SLA</div></div>
+  <div class="si reveal"><div class="sn" data-t="40">0</div><div class="sl">% Cost Saved</div></div>
+</div>
+
+<section id="skills">
+  <div class="sh"><span class="sn2">01 /</span><h2 class="st">Core Skills</h2><div class="sl2"></div></div>
+  <div class="skw">
+    <div class="skb reveal"><div class="ski">⚙️</div><div class="skn">CI/CD Pipelines</div><p class="skd">Built end-to-end pipelines with blue-green & canary strategies, SonarQube gates, Nexus artifact promotion, and GitOps workflows.</p><div class="skt"><span class="tag">Jenkins</span><span class="tag">GitHub Actions</span><span class="tag">GitLab CI</span><span class="tag">ArgoCD</span></div></div>
+    <div class="skb reveal"><div class="ski">☸️</div><div class="skn">Kubernetes</div><p class="skd">Managed EKS & AKS with RBAC, network policies, Istio mTLS, HPA/VPA autoscaling, Operators/CRDs achieving 99%+ uptime SLA.</p><div class="skt"><span class="tag">EKS</span><span class="tag">AKS</span><span class="tag">Helm</span><span class="tag">Istio</span></div></div>
+    <div class="skb reveal"><div class="ski">☁️</div><div class="skn">Cloud Platforms</div><p class="skd">Multi-AZ architectures on AWS & Azure with VPC, Transit Gateway, ZRS/LRS storage, cross-region failover, and cost optimization.</p><div class="skt"><span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">VPC</span><span class="tag">IAM</span></div></div>
+    <div class="skb reveal"><div class="ski">🏗️</div><div class="skn">Infrastructure as Code</div><p class="skd">Reusable Terraform modules with remote S3 state & DynamoDB locking. Ansible playbooks, roles, Vault, and Tower for config management.</p><div class="skt"><span class="tag">Terraform</span><span class="tag">Ansible</span><span class="tag">Ansible Tower</span></div></div>
+    <div class="skb reveal"><div class="ski">📊</div><div class="skn">Observability</div><p class="skd">Full observability stacks — Prometheus metrics, Grafana dashboards, ELK centralized logging with ILM policies and ElastAlert.</p><div class="skt"><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">ELK Stack</span></div></div>
+    <div class="skb reveal"><div class="ski">🔒</div><div class="skn">Security & Compliance</div><p class="skd">Aqua/Trivy image scanning, K8s RBAC, mTLS via Istio, HashiCorp Vault secrets management, and CIS benchmark compliance automation.</p><div class="skt"><span class="tag">Aqua</span><span class="tag">Trivy</span><span class="tag">Vault</span><span class="tag">SonarQube</span></div></div>
+  </div>
+</section>
+
+<section id="exp" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="sh"><span class="sn2">02 /</span><h2 class="st">Experience</h2><div class="sl2"></div></div>
+  <div class="exw">
+    <div class="exl"><div class="exb">EXP</div></div>
+    <div class="exi">
+      <div class="exe reveal">
+        <div class="exm"><span class="exc">DevOps Engineer</span><span class="exp">2023 — Present</span></div>
+        <div class="exr">Cloud Infrastructure · CI/CD · Kubernetes</div>
+        <ul class="exu">
+          <li>Built scalable CI/CD pipelines with blue-green & canary deployments, automated rollbacks, and multibranch Jenkins workflows.</li>
+          <li>Managed EKS & AKS clusters with RBAC, network policies, pod security, and TLS encryption achieving 99%+ uptime SLA.</li>
+          <li>Implemented Istio service mesh for mTLS service-to-service communication and canary traffic splitting via VirtualServices.</li>
+          <li>Provisioned AWS & Azure infra using Terraform modules with remote state, DynamoDB locking, and full CI/CD integration.</li>
+          <li>Reduced cloud costs by 40% through rightsizing, Reserved Instances, Spot usage, and S3 lifecycle policies.</li>
+          <li>Created Kubernetes Operators using Operator SDK and CRDs to automate complex cluster workflows.</li>
+        </ul>
+      </div>
+      <div class="exe reveal">
+        <div class="exm"><span class="exc">Junior DevOps / Cloud Intern</span><span class="exp">2022 — 2023</span></div>
+        <div class="exr">CI/CD · Docker · AWS Fundamentals</div>
+        <ul class="exu">
+          <li>Built Jenkins pipelines for automated testing and deployment to AWS EC2 and ECS environments.</li>
+          <li>Optimized Dockerfiles with multi-stage builds reducing image sizes by 60% using Alpine base images.</li>
+          <li>Set up CloudWatch dashboards and alarms for EC2, RDS, and ELB metrics improving production visibility.</li>
+          <li>Managed Git repositories and GitFlow branching strategies across multiple engineering teams.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proj">
+  <div class="sh"><span class="sn2">03 /</span><h2 class="st">Projects</h2><div class="sl2"></div></div>
+  <div class="prg">
+    <div class="prc reveal"><div class="prn">01</div><div class="prt">Multi-Cloud Kubernetes Platform</div><p class="prd">HA EKS & AKS clusters with Istio, cross-region Route 53 failover, automated etcd backups, and 99.9% uptime SLA across AWS & Azure.</p><div class="prs"><span class="tag">EKS</span><span class="tag">AKS</span><span class="tag">Istio</span><span class="tag">Terraform</span></div></div>
+    <div class="prc reveal"><div class="prn">02</div><div class="prt">End-to-End GitOps Pipeline</div><p class="prd">Jenkins + ArgoCD pipeline with SonarQube gates, Aqua scanning, Nexus artifacts, canary rollouts, and instant Helm rollback.</p><div class="prs"><span class="tag">Jenkins</span><span class="tag">ArgoCD</span><span class="tag">SonarQube</span><span class="tag">Helm</span></div></div>
+    <div class="prc reveal"><div class="prn">03</div><div class="prt">Terraform IaC Automation</div><p class="prd">Reusable VPC, EKS, RDS modules. Infracost in PRs for cost estimation. Atlantis for GitOps apply with full audit trail.</p><div class="prs"><span class="tag">Terraform</span><span class="tag">AWS</span><span class="tag">Atlantis</span><span class="tag">Infracost</span></div></div>
+    <div class="prc reveal"><div class="prn">04</div><div class="prt">Full-Stack Observability</div><p class="prd">Filebeat DaemonSets → Logstash → Elasticsearch with ILM policies. Prometheus custom metrics + Grafana alerting across all layers.</p><div class="prs"><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">ELK</span><span class="tag">Filebeat</span></div></div>
+    <div class="prc reveal"><div class="prn">05</div><div class="prt">Ansible Compliance Automation</div><p class="prd">CIS benchmark compliance across 100+ servers. Ansible Tower with RBAC, audit trail, and Jenkins REST API integration.</p><div class="prs"><span class="tag">Ansible</span><span class="tag">Tower</span><span class="tag">Vault</span><span class="tag">CIS</span></div></div>
+    <div class="prc reveal"><div class="prn">06</div><div class="prt">Custom Kubernetes Operator</div><p class="prd">Operator SDK controller watching DatabaseBackup CRDs. Handles snapshot creation, retention policies, and alerting automatically.</p><div class="prs"><span class="tag">Operator SDK</span><span class="tag">CRDs</span><span class="tag">Go</span><span class="tag">K8s</span></div></div>
+  </div>
+</section>
+
+<section id="contact" style="background:var(--surface);border-top:1px solid var(--border);">
+  <div class="sh"><span class="sn2">04 /</span><h2 class="st">Contact</h2><div class="sl2"></div></div>
+  <div class="ctw">
+    <div class="reveal">
+      <h3 class="ctb">LET'S<br>BUILD<br><span>TOGETHER</span></h3>
+      <p class="cts">Open to DevOps, Cloud Infrastructure, and SRE roles.<br>Let's modernize your pipeline or migrate to Kubernetes.</p>
+      <div class="ctl">
+        <a href="mailto:shaikhasif0114@gmail.com" class="cl"><span class="ci">✉</span>shaikhasif0114@gmail.com</a>
+        <a href="https://github.com/asifshaikh0114" target="_blank" class="cl"><span class="ci">⌥</span>github.com/asifshaikh0114</a>
+        <a href="#" class="cl"><span class="ci">📍</span>Mumbai, Maharashtra, India</a>
+      </div>
+    </div>
+    <div class="sp reveal">
+      <h4>// Full Tech Stack</h4>
+      <div class="sg"><div class="sgl">CI/CD</div><div class="stags"><span class="stag y">Jenkins</span><span class="stag y">GitHub Actions</span><span class="stag y">GitLab CI</span><span class="stag y">ArgoCD</span></div></div>
+      <div class="sg"><div class="sgl">Containers</div><div class="stags"><span class="stag o">Docker</span><span class="stag o">Kubernetes</span><span class="stag o">Helm</span><span class="stag o">Istio</span></div></div>
+      <div class="sg"><div class="sgl">Cloud</div><div class="stags"><span class="stag g">AWS</span><span class="stag g">Azure</span><span class="stag g">EKS</span><span class="stag g">AKS</span></div></div>
+      <div class="sg"><div class="sgl">IaC</div><div class="stags"><span class="stag y">Terraform</span><span class="stag y">Ansible</span><span class="stag y">Tower</span></div></div>
+      <div class="sg"><div class="sgl">Observability</div><div class="stags"><span class="stag o">Prometheus</span><span class="stag o">Grafana</span><span class="stag o">ELK Stack</span></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <span>Asif Shaikh</span> — DevOps Engineer</p>
+  <p><span>shaikhasif0114@gmail.com</span> · github.com/asifshaikh0114</p>
+</footer>
+
+<script>
+const c=document.getElementById('cur'),c2=document.getElementById('cur2');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;c2.style.left=rx+'px';c2.style.top=ry+'px';requestAnimationFrame(loop);})();
+document.querySelectorAll('a,button,.skb,.prc,.exe').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{c.style.width='16px';c.style.height='16px';c2.style.width='48px';c2.style.height='48px';});
+  el.addEventListener('mouseleave',()=>{c.style.width='8px';c.style.height='8px';c2.style.width='32px';c2.style.height='32px';});
+});
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*70);obs.unobserve(e.target);}});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const sObs=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting){
+    document.querySelectorAll('[data-t]').forEach(el=>{
+      const t=parseInt(el.dataset.t);let s=null;
+      const step=ts=>{if(!s)s=ts;const p=Math.min((ts-s)/1800,1);const e2=1-Math.pow(1-p,3);el.textContent=Math.floor(e2*t)+(t<=2?'+':t===15?'+':'%');if(p<1)requestAnimationFrame(step);};
+      requestAnimationFrame(step);
+    });sObs.disconnect();}},{threshold:0.5});
+const strip=document.querySelector('.strip');if(strip)sObs.observe(strip);
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});});
+</script>
+</body>
+</html>-3
