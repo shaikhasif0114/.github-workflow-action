@@ -1,0 +1,73 @@
+name: Deploy Portfolio
+
+# Manual trigger only — click button to deploy
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    # Required permissions for GitHub Pages deployment
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      # Step 1 — Checkout the repo code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2 — Show basic run info
+      - name: Show Run Info
+        run: |
+          echo "================================================"
+          echo "  Portfolio Deploy Started"
+          echo "================================================"
+          echo "Branch     : ${{ github.ref_name }}"
+          echo "Triggered  : ${{ github.actor }}"
+          echo "Repo       : ${{ github.repository }}"
+          echo "Runner OS  : $RUNNER_OS"
+          echo "Date/Time  : $(date)"
+          echo "================================================"
+
+      # Step 3 — Verify portfolio file exists
+      - name: Verify Portfolio File
+        run: |
+          echo "Checking portfolio files..."
+          ls -la
+          if [ -f "index.html" ]; then
+            echo "✅ index.html found!"
+            echo "File size: $(du -sh index.html)"
+          else
+            echo "❌ index.html NOT found"
+            echo "Make sure index.html is in the root of your repo"
+            exit 1
+          fi
+
+      # Step 4 — Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          publish_branch: gh-pages
+
+      # Step 5 — Print the Live Portfolio URL
+      - name: Print Portfolio URL
+        run: |
+          echo "================================================"
+          echo "  ✅ DEPLOYMENT SUCCESSFUL!"
+          echo "================================================"
+          echo ""
+          echo "  🌐 Your Portfolio is LIVE at:"
+          echo ""
+          echo "  https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+          echo ""
+          echo "  Direct URL:"
+          echo "  https://asifshaikh0114.github.io/90Days0fDevOps/"
+          echo ""
+          echo "  NOTE: It may take 2-3 minutes to go live"
+          echo "  after the first deployment."
+          echo "================================================"
