@@ -1,0 +1,50 @@
+name: Deployment
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  Code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: This step is for Code
+        run: echo "Step for Code is successful"
+
+  Build:
+    runs-on: ubuntu-latest
+    needs: Code                    # ← runs AFTER Code
+    steps:
+      - name: This step is for Build
+        run: echo "Step for Build is successful"
+
+  Test:
+    runs-on: ubuntu-latest
+    needs: Build                   # ← runs AFTER Build
+    steps:
+      - name: This step is for Test
+        run: echo "Step for Test is successful"
+
+  Deploy-Dev:
+    runs-on: ubuntu-latest
+    needs: Test                    # ← runs AFTER Test
+    environment: dev               # ← environment name
+    steps:
+      - name: Deploy to Dev
+        run: echo "Deploying to DEV environment"
+
+  Deploy-Staging:
+    runs-on: ubuntu-latest
+    needs: Deploy-Dev              # ← runs AFTER Dev
+    environment: staging           # ← environment name
+    steps:
+      - name: Deploy to Staging
+        run: echo "Deploying to STAGING environment"
+
+  Deploy-Prod:
+    runs-on: ubuntu-latest
+    needs: Deploy-Staging          # ← runs AFTER Staging
+    environment: prod              # ← environment name
+    steps:
+      - name: Deploy to Production
+        run: echo "Deploying to PROD environment"
