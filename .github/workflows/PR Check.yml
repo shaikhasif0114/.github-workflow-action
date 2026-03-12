@@ -1,0 +1,10 @@
+name: PR Check
+on:
+  pull_request:
+    - branches: main
+jobs:
+  PR-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: We are doing PR
+        runs: echo "PR is working fine ${{ github.head_ref }}"
