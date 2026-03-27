@@ -1,0 +1,30 @@
+
+name: CICD
+
+on: 
+  workflow_dispatch:
+
+jobs:
+
+  code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        run: echo "This step is for code checkout"
+  
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: This step is code build
+        run: echo "Docker container"
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: This step is for testing code
+        run: echo " Code is testing"
+
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: This step is for deplyment
+        run: echo "Code is deploying"
