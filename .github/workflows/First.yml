@@ -3,10 +3,10 @@
 name: Hello workflow
 on:
   push:
-    branch:
+     branch:
       - main
 jobs:
-  greet:
+  True:
     runs-on: ubuntu-latest
     steps:
       - name: say hello to users
