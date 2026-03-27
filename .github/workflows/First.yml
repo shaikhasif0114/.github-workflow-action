@@ -1,24 +1,20 @@
 #This is workflow name
 
 name: Hello workflow
-
 on:
-  push: 
-    branch: [main]
-#these are jobs inside workflow
+  push:
+    branch:
+      - main
 jobs:
-
-#this is the name of the job
   greet:
     runs-on: ubuntu-latest
     steps:
       - name: say hello to users
         run: echo "Hello Dosto"
-
       - name: say hello to username
         run: echo "This is $USER"
- details:
-     runs-on: ubuntu-latest
-     steps:
-       - name: What is the version of python & docker
-         run: echo "docker --version && python --version"
+  details:
+    runs-on: ubuntu-latest
+    steps:
+      - name: What is the version of python & docker
+        run: echo "docker --version && python --version"
