@@ -1,6 +1,7 @@
 name: OS details
 on:
   push: 
+  workflow_dispatch: 
 jobs:
   OS:
     runs-on: ubuntu-latest
