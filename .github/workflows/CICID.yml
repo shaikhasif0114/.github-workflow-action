@@ -10,9 +10,9 @@ on:
         required: true
         type: choice
         options:
-           - dev:
-           - stagging:
-           - prod:
+           - dev
+           - stagging
+           - prod
 
 jobs:
 
