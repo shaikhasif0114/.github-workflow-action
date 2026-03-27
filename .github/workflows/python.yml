@@ -16,10 +16,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Python $ {{ matrix.python-version}}
+      - name: setup python $ {{ matrix.python-version}}
         uses: actions/setup-python@v5
         with:
-          python-version: $ {{ matrix.python-version}}
+          python-version: ${{ matrix.python-version}}
 
       - name: Install dependencies
         run: 
