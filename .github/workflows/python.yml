@@ -1,0 +1,23 @@
+name: python lint
+on:
+    push:
+        branches: [main]
+
+jobs:
+
+    validate:
+        runs-on:uubuntu-latest
+        steps:
+            -name: checkout code
+             uses: actions/checkout@v4
+
+            - name: Setup Python 3.13
+              uses: actions/setup-python@v5
+              with: 
+                python-version:3.3
+
+            - name: Install dependencies
+              run: pip install -r requirements.txt
+
+            - name: Lint with flake8
+              run: flake8 .
