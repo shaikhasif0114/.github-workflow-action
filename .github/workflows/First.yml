@@ -5,6 +5,7 @@ on:
   push:
      branch:
       - main
+     paths: "**.html"
 jobs:
   True:
     runs-on: ubuntu-latest
