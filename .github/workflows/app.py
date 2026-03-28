@@ -12,5 +12,6 @@ def hello_world():
 def health():
     return 'Server is up and running'
 
-   
+if __name__ == "__main__":
 app.run(debug=TRUE, host='0.0.0.0', ports=80)
+
