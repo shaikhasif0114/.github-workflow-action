@@ -11,10 +11,13 @@ jobs:
     DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
 
    runs-on: self-hosted    
-      
+
    steps:
        - name: Code checkout
          uses: actions/checkout@v4
+
+       - name: Setup docker decompose
+         uses: docker/setup-compose-action@v2
 
        - name:  deploy with docker compose
          run: docker compose up -d --build   
