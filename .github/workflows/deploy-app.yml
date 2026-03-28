@@ -3,12 +3,11 @@ name: Deploy Flask app
 on:
   workflow_dispatch:
 
-env:
-   DOCKERHUB_USER: { vars.DOCKERHUB_USER }
-
 jobs:
- 
-    deploy:
+    env:
+     DOCKERHUB_USER: $ {{ vars.DOCKERHUB_USER }}
+
+   deploy:
         runs-on: self-hosted
 
     steps:
@@ -17,5 +16,3 @@ jobs:
 
        - name:  deploy with docker compose
          run: docker compose up -d --build   
-
-         
