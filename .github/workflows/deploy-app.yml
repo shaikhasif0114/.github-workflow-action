@@ -3,12 +3,15 @@ name: Deploy Flask app
 on:
   workflow_dispatch:
 
-env:
-    DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
 jobs:
   
   deploy:
-   runs-on: self-hosted       
+
+   env:
+    DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
+
+   runs-on: self-hosted    
+      
    steps:
        - name: Code checkout
          uses: actions/checkout@v4
