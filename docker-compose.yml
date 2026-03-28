@@ -1,5 +1,5 @@
 services:
-   web:
+  web:
       image: ${DOCKERHUB_USER}/github-actions-app:latest
-     ports:
+      ports:
       - "80:80"
