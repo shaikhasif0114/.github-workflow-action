@@ -4,8 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-    DOCKERHUB_USER: $ {{ vars.DOCKERHUB_USER }}
-    
+    DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
 jobs:
   
   deploy:
