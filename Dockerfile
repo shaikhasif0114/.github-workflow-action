@@ -1,8 +1,8 @@
 #take a pateela
 
-FROM python:3.8-slim
+FROM python:3.12-slim
 
-workdir /app
+WORKDIR /app
 
 COPY . .
 
