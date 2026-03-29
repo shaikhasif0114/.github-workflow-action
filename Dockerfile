@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY app.py .
 COPY requirements.txt .
-COPY templates/ templates/    # ← change this line (was: COPY index.html .)
+COPY templates/ templates/
 
 RUN pip install -r requirements.txt
 
