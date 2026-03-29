@@ -6,6 +6,8 @@ COPY app.py .
 
 COPY requirements.txt .
 
+COPY templates/ templates/
+
 RUN pip install -r requirements.txt
 
 EXPOSE 80
