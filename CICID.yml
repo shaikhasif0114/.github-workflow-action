@@ -1,0 +1,44 @@
+
+name: CICD
+
+on: 
+  workflow_dispatch:
+    inputs:
+      environmnet:
+        description: This is the environment where workflow runs
+        default: 'dev'
+        required: true
+        type: choice
+        options:
+           - dev
+           - stagging
+           - prod
+
+jobs:
+
+  code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        run: echo "This step is for code checkout"
+  
+  build:
+    runs-on: ubuntu-latest
+    needs: [code]
+    steps:
+      - name: This step is code build
+        run: echo "Docker container"
+  Test:
+    runs-on: ubuntu-latest
+    needs: [code,build]
+    steps:
+      - name: This step is for testing code
+        run: echo " Code is testing"
+
+  Deploy:
+    if: inputs.environment == 'dev'
+    runs-on: ubuntu-latest
+    needs: [code,build,test]
+    steps:
+      - name: This step is for deplyment
+        run: echo "Code is deploying"
