@@ -1,0 +1,26 @@
+#Use Trivy Images for cve SCANNING
+
+name: Image Scan
+
+on:
+    workflow_call:
+
+jobs:
+        dependency_scan:
+            runs-on: ubuntu-latest
+
+            steps:
+                - name: Checkout code
+                  uses: actions/checkout@v4
+
+                - name: Docker login
+                  uses: docker/login-action@v3
+                  with:
+                  username: ${{ vars.DOCKERHUB_USER }}
+                  password: ${{ secrets.DOCKERHUB }}
+
+                - name: Run Trivy image scanner
+                  uses: aquasecurity/trivy-action@v0.33.0
+                  with:
+                  severity: 'CRITICAL'
+                  exitcode: 1
