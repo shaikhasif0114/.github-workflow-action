@@ -1,6 +1,9 @@
 name: Greetings
 on:
-  push: 
+  
+   workflow_dispatch:
+    
+    #push: 
 
 jobs:
   greet:

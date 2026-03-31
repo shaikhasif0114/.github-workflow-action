@@ -2,10 +2,13 @@
 
 name: Hello workflow
 on:
-  push:
-     branch:
-      - main
-     paths: "**.html"
+
+   workflow_dispatch:
+    
+  #push:
+     #branch:
+      #- main
+     #paths: "**.html"
 jobs:
   True:
     runs-on: ubuntu-latest
