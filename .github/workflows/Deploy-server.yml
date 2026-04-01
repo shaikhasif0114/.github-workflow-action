@@ -1,0 +1,25 @@
+#This will deploy on server
+
+on: 
+    workflow_call:
+
+jobs:
+
+    deploy-server:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Code Checkout
+              uses: actions/checkout@v4
+
+            - name: Execute remote SSH commands using password
+              uses: appleboy/ssh-action@v1.0.3
+              with:
+               host: ${{ secrets.EC2_HOST }}
+               username: ${{ secrets.EC2_USERNAME }}
+               password: ${{ secrets.EC2_PASSWORD }}
+               port: ${{ secrets.EC2_PORT }}
+               script: |
+                    cd /home/ubuntu/github-actions-app
+                    docker-compose down
+                    docker-compose pull

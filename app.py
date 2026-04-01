@@ -11,4 +11,4 @@ def health():
     return 'Server is up and running'
 
 if __name__ == '__main__':                         # ✅ outside functions
-    app.run(debug=True, host='0.0.0.0', port=80)   # ✅ correct place
+    app.run(port=80)   # ✅ correct place
