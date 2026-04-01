@@ -24,8 +24,5 @@ jobs:
 
                 - name: Install Dependencies
                   run: pip-audit -r requirements.txt
-
-              
-                  
                 
 
