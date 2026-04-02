@@ -4,9 +4,9 @@ WORKDIR /app
 
 COPY app.py .
 
-COPY requirements.txt .
+COPY .github/workflows/requirements.txt .
 
-COPY requirements.txt ./templates
+COPY templates ./templates
 
 RUN pip install -r requirements.txt
 
