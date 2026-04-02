@@ -28,9 +28,4 @@ jobs:
                script: |
                     echo "Starting development on server"
                     mkdir -p devsecops
-                    cd devops
-                    git clone
-                    cd devsecops
-                    docker build -t devsecops:latest .
-                    docker run -d -p 80:80 devsecops:latest
                     
