@@ -20,8 +20,8 @@ jobs:
               uses: appleboy/ssh-action@v1.0.3
               with:
                host: ${{ secrets.EC2_HOST }}
-               username: ${{ secrets.EC2_USERNAME }}
-               password: ${{ secrets.EC2_PASSWORD }}
+               username: ${{ secrets.EC2_USER }}
+               key: ${{ secrets.EC2_PRIVATE_KEY }}
                port: ${{ secrets.EC2_PORT }}
                script: |
                     echo "Starting development on server"
