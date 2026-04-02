@@ -22,7 +22,6 @@ jobs:
                host: ${{ secrets.EC2_HOST }}
                username: ${{ secrets.EC2_USER }}
                key: ${{ secrets.EC2_PRIVATE_KEY }}
-               port: ${{ secrets.EC2_PORT }}
                script: |
                     echo "Starting development on server"
                     mkdir -p devsecops
