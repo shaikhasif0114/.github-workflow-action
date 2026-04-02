@@ -6,7 +6,7 @@ COPY app.py .
 
 COPY requirements.txt .
 
-COPY .github/workflows/requirements.txt ./templates
+COPY requirements.txt ./templates
 
 RUN pip install -r requirements.txt
 
