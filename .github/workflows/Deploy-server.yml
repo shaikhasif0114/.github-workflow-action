@@ -9,7 +9,9 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            
+            - name: Code checkout
+              uses: actions/checkout@v4
+
             - name: Docker login
               uses: docker/login-action@v3
               with:
@@ -23,6 +25,12 @@ jobs:
                username: ${{ secrets.EC2_SSH_USER }}
                key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
                script: |
-                    echo "Starting development on server"
-                    mkdir -p devsecops
+                    echo "Running Apps"
+                                    
+                    export DOCKERHUB_USER=${{ vars.DOCKERHUB_USER }}
+                    export DOCKERHUB_TAG=$${{ github.event.workflow_run.head_sha }}
+                    echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}| docker login --username  ${{ vars.DOCKERHUB_USER }}" --password-stdin
+                    cd ~/devsecops && docker compose down && docker compose up -d --force-recreate --pull always 
+
+
                     
