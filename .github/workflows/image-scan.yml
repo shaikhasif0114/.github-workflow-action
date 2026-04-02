@@ -14,14 +14,6 @@ jobs:
           username: ${{ vars.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB }}
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: .github/workflows/Dockerfile
-          push: true
-          tags: ${{ vars.DOCKERHUB_USER }}/github-actions-app:${{ github.sha }}
-
       - name: Trivy image scanner
         uses: aquasecurity/trivy-action@0.35.0
         with:
