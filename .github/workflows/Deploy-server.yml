@@ -7,6 +7,9 @@ jobs:
 
     deploy-server:
         runs-on: ubuntu-latest
+        env:
+         DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
+         DOCKERHUB_TAG: ${{ github.sha }}/
 
         steps:
             - name: Code checkout
