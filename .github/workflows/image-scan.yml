@@ -20,7 +20,7 @@ jobs:
                    password: ${{ secrets.DOCKERHUB }}
 
                 - name: Trivy image scanner
-                  uses: aquasecurity/trivy-action@0.65.0
+                  uses: aquasecurity/trivy-action@0.35.0
                   with:
                     image-ref: ${{ vars.DOCKERHUB_USER }}/githubactions-app:latest
                     severity: 'CRITICAL'
