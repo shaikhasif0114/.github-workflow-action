@@ -1,6 +1,6 @@
 #Use Trivy Images for cve SCANNING
 
-name: Image Scan
+name: Trivy Image Scanner
 
 on:
     workflow_call:

@@ -18,7 +18,11 @@ jobs:
     Docker-lint:
           uses: ./.github/workflows/docker-lint.yml
 
-    Built:
+    Build:
           needs: [Code-Quality, Secret-Scans, Dependices-Server, Docker-lint]
           uses: ./.github/workflows/Deploy-server.yml
           secrets: inherit
+
+    Trivy:
+         needs: [Build]
+         uses: ./.github/workflows/image-scan.yml
