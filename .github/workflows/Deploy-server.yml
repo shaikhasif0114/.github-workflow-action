@@ -30,8 +30,6 @@ jobs:
                script: |
                     echo "Running Apps"
                                     
-                    export DOCKERHUB_USER=${{ vars.DOCKERHUB_USER }}
-                    export DOCKERHUB_TAG=$${{ github.event.workflow_run.head_sha }}
                     echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}| docker login --username  ${{ vars.DOCKERHUB_USER }}" --password-stdin
                     cd ~/devsecops && docker compose down && docker compose up -d --force-recreate --pull always 
 
