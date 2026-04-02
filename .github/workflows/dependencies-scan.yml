@@ -23,8 +23,8 @@ jobs:
                   run:  pip install pip-audit
 
                 - name: Install Dependencies
-                  run: pip install -r ./github/requirements.txt
+                  run: pip install -r .github/workflows/requirements.txt
 
                 - name:  Run pip-audit
-                  run: pip-audit -r ./github/requirements.txt
+                  run: pip-audit -r .github/workflows/requirements.txt
                 
