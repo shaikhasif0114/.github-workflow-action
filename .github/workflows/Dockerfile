@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY app.py .
 
-COPY .github/workflows/requirements.txt .
+COPY . .
 
 COPY templates ./templates
 
