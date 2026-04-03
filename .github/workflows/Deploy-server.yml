@@ -9,7 +9,7 @@ jobs:
         runs-on: ubuntu-latest
         env:
          DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
-         DOCKERHUB_TAG: ${{ github.sha }}/
+         DOCKERHUB_TAG: ${{ github.sha }}
 
         steps:
             - name: Code checkout
@@ -35,7 +35,16 @@ jobs:
                     export DOCKERHUB_TAG=${{ github.sha }}
                     echo  ${{ github.sha }}
                     docker login -u ${{ vars.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB }}
-                     cd devsecops
+                    mkdir -p /home/${{ secrets.EC2_SSH_USER }}/devsecops
+      
+                    cat > /home/${{ secrets.EC2_SSH_USER }}/devsecops/docker-compose.yml << 'EOF'
+                    services:
+                     web:
+                      image: ${{ vars.DOCKERHUB_USER }}/github-actions-app:${{ github.sha }}
+                      ports:
+                        - "80:80"
+                     'EOF'
+                     cd /home/${{ secrets.EC2_SSH_USER }}/devsecops
                      ls -la
                      docker compose -f docker-compose.yml down
                      docker compose -f docker-compose.yml up -d --force-recreate --pull always                     
