@@ -1,3 +1,4 @@
+# Use Trivy image scanner
 name: Trivy Image Scanner
 on: workflow_call
 
@@ -5,9 +6,7 @@ jobs:
   dependency_scan:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      
       - name: Docker login
         uses: docker/login-action@v3
         with:
