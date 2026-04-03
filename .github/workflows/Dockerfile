@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY app.py .
 
-COPY . .
+COPY requirements.txt .
 
 COPY templates ./templates
 
