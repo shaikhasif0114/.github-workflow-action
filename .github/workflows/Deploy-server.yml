@@ -22,6 +22,8 @@ jobs:
                username: ${{ secrets.EC2_SSH_USER }}
                key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
                 echo "Starting the deployment process"
+                sudo apt-get update && sudo apt-get install docker.io docker-compose-v2 -y
+                sudo usermod -aG docker $USER && newgrp docker
                 mkdir -p devsecops
 
             - name: Copy the docker compose fiel to the server
@@ -41,10 +43,9 @@ jobs:
                key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
                script: |
                 echo "---Running the app"
-                sudo apt-get update && sudo apt-get install docker.io docker-compose-v2 -y
-                sudo usermod -aG docker $USER && newgrp docker 
+                 
                 export DOCKERHUB_USER=${{ vars.DOCKERHUB_USER }}
-                export DOCKERHUB_TAG=${{ github.event.workflow_run.head_sha }}
-                echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USER}} --password-stdin
+                export DOCKERHUB_TAG=${{ github.sha }}
+                echo ${{ secrets.DOCKERHUB }} | docker login -u ${{ secrets.DOCKERHUB_USER}} --password-stdin
                 cd ~/devsecops &&docker compose down && docker compose up -d --build --force-recreate --pull always
                 
