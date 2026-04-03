@@ -35,11 +35,18 @@ jobs:
                 docker login -u ${{ vars.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB }}
                 mkdir -p /home/${{ secrets.EC2_SSH_USER }}/devsecops
                 cd /home/${{ secrets.EC2_SSH_USER }}/devsecops
-                echo "services:
+
+                cat > docker-compose.yml << 'EOF'
+                
+                services:
                  web:
                 image: ${DOCKERHUB_USER}/github-actions-app:${DOCKERHUB_TAG}
                 ports:
-                 - '80:80'" > docker-compose.yml
+                 - '80:80'" 
+                 
+                EOF
+                echo "----Verfiying File"
+                cat docker-compose.yml
+                
                 ls -la
-                docker compose -f docker-compose.yml down
-                docker compose -f docker-compose.yml up -d --force-recreate --pull always
+                docker compose -f docker-compose.yml down && docker compose -f docker-compose.yml up -d --force-recreate --pull always
