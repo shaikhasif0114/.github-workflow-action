@@ -16,4 +16,4 @@ jobs:
                 - name: Validate Dockerfile using Hadolint
                   uses: hadolint/hadolint-action@v3.1.0
                   with:
-                    dockerfile: .
+                    dockerfile: .github/workflows/Dockerfile
