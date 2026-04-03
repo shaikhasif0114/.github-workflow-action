@@ -21,7 +21,7 @@ jobs:
 
     Build:
           needs: [Code-Quality, Secret-Scan, Dependices-Scan, Docker-Scan]
-          uses: ./.github/workflows/Deploy-server.yml
+          uses: ./.github/workflows/docker-build-push.yml
           secrets: inherit
 
     Trivy:
@@ -31,6 +31,6 @@ jobs:
 
     Deploy:
          needs: [Trivy]
-         uses: ./.github/workflows/docker-build-push.yml
+         uses: ./.github/workflows/Deploy-server.yml
          secrets: inherit
        
