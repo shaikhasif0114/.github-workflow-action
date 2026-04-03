@@ -42,7 +42,7 @@ jobs:
                username: ${{ secrets.EC2_SSH_USER }}
                key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
                script: |
-                echo "---Running the app"
+                echo "---Running the app----"
                  
                 export DOCKERHUB_USER=${{ vars.DOCKERHUB_USER }}
                 export DOCKERHUB_TAG=${{ github.sha }}
