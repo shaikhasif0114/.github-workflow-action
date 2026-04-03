@@ -31,6 +31,6 @@ jobs:
 
     Deploy:
          needs: [Trivy]
-         uses: ./.github/workflows/Deploy-server.yml
+         uses: ./.github/workflows/docker-build-push.yml
          secrets: inherit
        
