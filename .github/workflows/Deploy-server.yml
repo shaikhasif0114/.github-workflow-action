@@ -35,4 +35,7 @@ jobs:
                     export DOCKERHUB_TAG=${{ github.sha }}
                     echo  ${{ github.sha }}
                     docker login -u ${{ vars.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB }}
-                    cd devsecops && docker compose down && docker compose up -d --force-recreate --pull always                     
+                     cd devsecops
+                     ls -la
+                     docker compose -f docker-compose.yml down
+                     docker compose -f docker-compose.yml up -d --force-recreate --pull always                     
