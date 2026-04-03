@@ -28,23 +28,18 @@ jobs:
                username: ${{ secrets.EC2_SSH_USER }}
                key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
                script: |
-                    echo "Running Apps"
-                                    
-                    export DOCKERHUB_USER=${{ vars.DOCKERHUB_USER }}
-                    export DOCKERHUB_TAG=$${{ github.event.workflow_run.head_sha }}
-                    export DOCKERHUB_TAG=${{ github.sha }}
-                    echo  ${{ github.sha }}
-                    docker login -u ${{ vars.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB }}
-                    mkdir -p /home/${{ secrets.EC2_SSH_USER }}/devsecops
-      
-                    cat > /home/${{ secrets.EC2_SSH_USER }}/devsecops/docker-compose.yml << 'EOF'
-                    services:
-                     web:
-                      image: ${{ vars.DOCKERHUB_USER }}/github-actions-app:${{ github.sha }}
-                      ports:
-                        - "80:80"
-                     'EOF'
-                     cd /home/${{ secrets.EC2_SSH_USER }}/devsecops
-                     ls -la
-                     docker compose -f docker-compose.yml down
-                     docker compose -f docker-compose.yml up -d --force-recreate --pull always                     
+                echo "Running Apps"
+                export DOCKERHUB_USER=${{ vars.DOCKERHUB_USER }}
+                export DOCKERHUB_TAG=${{ github.sha }}
+                echo ${{ github.sha }}
+                docker login -u ${{ vars.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB }}
+                mkdir -p /home/${{ secrets.EC2_SSH_USER }}/devsecops
+                cd /home/${{ secrets.EC2_SSH_USER }}/devsecops
+                echo "services:
+                 web:
+                image: ${DOCKERHUB_USER}/github-actions-app:${DOCKERHUB_TAG}
+                ports:
+                 - '80:80'" > docker-compose.yml
+                ls -la
+                docker compose -f docker-compose.yml down
+                docker compose -f docker-compose.yml up -d --force-recreate --pull always
