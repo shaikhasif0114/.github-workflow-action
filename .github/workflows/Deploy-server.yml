@@ -7,9 +7,10 @@ jobs:
 
     deploy-server:
         runs-on: ubuntu-latest
+
         env:
          DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
-         DOCKERHUB_TAG: ${{ github.sha }}
+         DOCKERHUB_TAG: ${{ github.event.workflow_run.head_sha }}
 
         steps:
             - name: Code checkout
@@ -45,7 +46,9 @@ jobs:
                 echo "---Running the app----"
                  
                 export DOCKERHUB_USER=${{ vars.DOCKERHUB_USER }}
-                export DOCKERHUB_TAG=${{ github.sha }}
+                export DOCKERHUB_TAG=${{ github.event.workflow_run.head_sha }}
+                export DOCKERHUB_TAG=$GITHUB_WORKFLOW_SHA
+                echo ${{ github.sha }}
                 echo ${{ secrets.DOCKERHUB }} | docker login --username ${{ vars.DOCKERHUB_USER}} --password-stdin
                 cd ~/devsecops &&docker compose down && docker compose up -d --build --force-recreate --pull always
                 
