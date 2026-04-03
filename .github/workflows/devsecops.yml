@@ -1,6 +1,7 @@
 #End to end pipline
 
-name:  DevSecOps Pipeline
+name:  DevSecOps End to End Pipeline
+
 on:
     workflow_dispatch:
 
@@ -9,17 +10,17 @@ jobs:
     Code-Quality:
           uses: ./.github/workflows/code-quality.yml
 
-    Secret-Scans:
+    Secret-Scan:
           uses: ./.github/workflows/secret-scans.yml
 
-    Dependices-Server:
+    Dependices-Scan:
           uses: ./.github/workflows/dependencies-scan.yml
 
-    Docker-lint:
+    Docker-Scan:
           uses: ./.github/workflows/docker-lint.yml
 
     Build:
-          needs: [Code-Quality, Secret-Scans, Dependices-Server, Docker-lint]
+          needs: [Code-Quality, Secret-Scan, Dependices-Scan, Docker-Scan]
           uses: ./.github/workflows/Deploy-server.yml
           secrets: inherit
 
