@@ -2,7 +2,7 @@
 name: Docker-build-push
 
 on:
-   workflow_dispatch:
+   workflow_call:
 
 
 jobs:
