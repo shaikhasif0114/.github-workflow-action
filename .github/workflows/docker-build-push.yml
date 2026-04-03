@@ -22,7 +22,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: docker-compose.yml
+          context: .
           push: true
           tags: |
             ${{ vars.DOCKERHUB_USER }}/github-actions-app:${{ github.ref_name }}
