@@ -15,38 +15,36 @@ jobs:
             - name: Code checkout
               uses: actions/checkout@v4
 
-            - name: Docker login
-              uses: docker/login-action@v3
+            - name: SSH commands using password  & create the folder
+              uses: appleboy/ssh-action@v1.0.3
               with:
-               username: ${{ vars.DOCKERHUB_USER }}
-               password: ${{ secrets.DOCKERHUB }}
+               host: ${{ secrets.EC2_SSH_HOST }}
+               username: ${{ secrets.EC2_SSH_USER }}
+               key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+                echo "Starting the deployment process"
+                mkdir -p devsecops
 
-            - name: SSH commands using password
+            - name: Copy the docker compose fiel to the server
+              uses: appleboy/scp-action@v1
+              with:
+               host: ${{ secrets.EC2_SSH_HOST }}
+               username: ${{ secrets.EC2_SSH_USER }}
+               key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+               source: docker-compose.yml
+               target: ~/devsecops
+            
+            - name: SSH commands using password  & run the app
               uses: appleboy/ssh-action@v1.0.3
               with:
                host: ${{ secrets.EC2_SSH_HOST }}
                username: ${{ secrets.EC2_SSH_USER }}
                key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
                script: |
-                echo "Running Apps"
+                echo "---Running the app"
+                sudo apt-get update && sudo apt-get install docker.io docker-compose-v2 -y
+                sudo usermod -aG docker $USER && newgrp docker 
                 export DOCKERHUB_USER=${{ vars.DOCKERHUB_USER }}
-                export DOCKERHUB_TAG=${{ github.sha }}
-                echo ${{ github.sha }}
-                docker login -u ${{ vars.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB }}
-                mkdir -p /home/${{ secrets.EC2_SSH_USER }}/devsecops
-                cd /home/${{ secrets.EC2_SSH_USER }}/devsecops
-
-                cat > docker-compose.yml << 'EOF'
+                export DOCKERHUB_TAG=${{ github.event.workflow_run.head_sha }}
+                echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USER}} --password-stdin
+                cd ~/devsecops &&docker compose down && docker compose up -d --build --force-recreate --pull always
                 
-                services:
-                 web:
-                image: ${DOCKERHUB_USER}/github-actions-app:${DOCKERHUB_TAG}
-                ports:
-                 - '80:80'" 
-                 
-                EOF
-                echo "----Verfiying File"
-                cat docker-compose.yml
-                
-                ls -la
-                docker compose -f docker-compose.yml down && docker compose -f docker-compose.yml up -d --force-recreate --pull always
